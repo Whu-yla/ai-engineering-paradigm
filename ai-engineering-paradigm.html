@@ -446,59 +446,177 @@ h4,.h4{font-size:28px}
 </section>
 
 <!-- ============ 16 SECTION 04 ============ -->
-<section class="slide center tc grid-bg" data-title="Section 04">
+<section class="slide center tc grid-bg" data-title="写在最后">
   <div style="max-width:820px">
-    <p class="kicker anim-fade-down" data-anim="fade-down">Section · 04</p>
-    <h1 class="h1 anim-rise-in" data-anim="rise-in" style="font-size:104px">价值与<span class="gradient-text">落地</span></h1>
+    <p class="kicker anim-fade-down" data-anim="fade-down">写在最后</p>
+    <h1 class="h1 anim-rise-in" data-anim="rise-in" style="font-size:110px">价值与<span class="gradient-text">落地</span></h1>
     <div class="divider-accent" style="margin:24px auto"></div>
     <p class="lede" style="margin:0 auto">从效率收益、实施路径到风险应对，把范式从「概念」落到「工程」。</p>
   </div>
-  <div class="deck-footer"><span class="dim2">04 · 价值与落地</span><span class="snum" data-current="16" data-total="22"></span></div>
+  <div class="deck-footer"><span class="dim2">价值与落地</span><span class="snum" data-current="16" data-total="22"></span></div>
 </section>
 
-<!-- ============ 17 COMPARISON ============ -->
-<section class="slide grid-bg" data-title="范式对比">
-  <p class="kicker">Before vs After · 范式对比</p>
-  <h2 class="h2">传统范式 vs 新型范式</h2>
-  <div class="vs">
-    <div class="card bad-side side anim-fade-left" data-anim="fade-left">
-      <h3>📉 传统范式</h3>
-      <ul>
-        <li>人力密集，人主导执行</li>
-        <li>经验难沉淀，随人流失</li>
-        <li>协作靠口头同步与对齐</li>
-        <li>质量依赖资深个体把关</li>
-        <li>反馈回路以「天 / 周」计</li>
-      </ul>
+<!-- ============ 17 TECH ARCHITECTURE ============ -->
+<section class="slide grid-bg" data-title="技术架构">
+  <p class="kicker">Architecture · 技术路线</p>
+  <h2 class="h2">BS系统技术栈与服务架构</h2>
+  <div class="tech-arch anim-stagger-list" data-anim-target>
+    <!-- L1: 用户层 -->
+    <div class="ta-row">
+      <div class="ta-label">用户层</div>
+      <div class="ta-cells">
+        <div class="ta-cell">🌐 Web浏览器</div>
+        <div class="ta-cell">📱 移动端H5</div>
+        <div class="ta-cell">🖥️ 桌面客户端</div>
+        <div class="ta-cell">🔧 管理后台</div>
+      </div>
     </div>
-    <div class="mid">→</div>
-    <div class="card good-side side anim-fade-right" data-anim="fade-right">
-      <h3>📈 新型范式</h3>
-      <ul>
-        <li>智能体密集，人负责编排决策</li>
-        <li>知识资产化，可复用可累积</li>
-        <li>协作靠版本基线与知识库</li>
-        <li>质量靠智能体评审 + 自修复</li>
-        <li>反馈回路以「分钟」计</li>
-      </ul>
+    <!-- L2: 代理层 -->
+    <div class="ta-row hl">
+      <div class="ta-label">代理层</div>
+      <div class="ta-cells">
+        <div class="ta-cell hl-cell">⚖️ Nginx 负载均衡</div>
+        <div class="ta-cell">🔒 HTTPS / SSL证书</div>
+        <div class="ta-cell">🚪 API网关</div>
+        <div class="ta-cell">🛡️ WAF防火墙</div>
+      </div>
+    </div>
+    <!-- L3: 应用服务层 -->
+    <div class="ta-row">
+      <div class="ta-label">应用服务</div>
+      <div class="ta-cells">
+        <div class="ta-cell">📦 用户服务</div>
+        <div class="ta-cell">📦 业务服务</div>
+        <div class="ta-cell">📦 权限服务</div>
+        <div class="ta-cell">📦 文件服务</div>
+        <div class="ta-cell">📦 消息服务</div>
+      </div>
+    </div>
+    <!-- L4: 数据中台 -->
+    <div class="ta-row hl">
+      <div class="ta-label">数据中台</div>
+      <div class="ta-cells">
+        <div class="ta-cell hl-cell">📊 数据采集</div>
+        <div class="ta-cell hl-cell">📊 数据治理</div>
+        <div class="ta-cell hl-cell">📊 数据分析</div>
+        <div class="ta-cell hl-cell">📊 数据可视化</div>
+      </div>
+    </div>
+    <!-- L5: 中间件 -->
+    <div class="ta-row">
+      <div class="ta-label">中间件</div>
+      <div class="ta-cells">
+        <div class="ta-cell">⚡ Redis缓存</div>
+        <div class="ta-cell">💌 RabbitMQ消息队列</div>
+        <div class="ta-cell">🔍 ElasticSearch搜索引擎</div>
+        <div class="ta-cell">📋 Nacos注册中心</div>
+      </div>
+    </div>
+    <!-- L6: 数据库层 -->
+    <div class="ta-row hl">
+      <div class="ta-label">数据库</div>
+      <div class="ta-cells">
+        <div class="ta-cell hl-cell">🗄️ MySQL主从集群</div>
+        <div class="ta-cell hl-cell">🗄️ MongoDB文档库</div>
+        <div class="ta-cell hl-cell">🗄️ ClickHouse数仓</div>
+        <div class="ta-cell hl-cell">🗄️ MinIO对象存储</div>
+      </div>
     </div>
   </div>
-  <div class="deck-footer"><span class="dim2">04 · 价值与落地</span><span class="snum" data-current="17" data-total="22"></span></div>
+  <!-- 人员流程 -->
+  <div class="ta-roles">
+    <span class="ta-role">产品经理</span>
+    <span class="ta-arrow">→</span>
+    <span class="ta-role">需求分析</span>
+    <span class="ta-arrow">→</span>
+    <span class="ta-role">UI/UX设计</span>
+    <span class="ta-arrow">→</span>
+    <span class="ta-role">开发</span>
+    <span class="ta-arrow">→</span>
+    <span class="ta-role">测试</span>
+    <span class="ta-arrow">→</span>
+    <span class="ta-role">运维</span>
+  </div>
+  <div class="deck-footer"><span class="dim2">价值与落地</span><span class="snum" data-current="17" data-total="22"></span></div>
+  <style>
+    .tech-arch{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+    .ta-row{display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:stretch}
+    .ta-row.hl .ta-label{background:var(--accent);color:#fff}
+    .ta-label{display:flex;align-items:center;justify-content:center;background:var(--surface-2);border-radius:var(--radius-sm);padding:10px;font-weight:700;font-size:16px;color:var(--text-2);text-transform:uppercase;letter-spacing:.06em;text-align:center}
+    .ta-cells{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+    .ta-cell{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;text-align:center;font-size:15px;color:var(--text-1);box-shadow:var(--shadow)}
+    .ta-row.hl .ta-cell{border-color:var(--accent)}
+    .ta-cell.hl-cell{border:2px solid var(--accent);background:color-mix(in srgb,var(--accent) 6%,var(--surface))}
+    .ta-roles{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+    .ta-role{display:inline-block;padding:8px 18px;border-radius:999px;background:var(--surface);border:2px solid var(--accent);color:var(--accent);font-size:15px;font-weight:700}
+    .ta-arrow{font-size:20px;color:var(--text-3)}
+  </style>
 </section>
 
-<!-- ============ 18 KPI ============ -->
-<section class="slide grid-bg" data-title="效率跃迁">
-  <p class="kicker">Metrics · 效率跃迁</p>
-  <h2 class="h2">范式带来的效率跃迁</h2>
-  <div class="grid g4 mt-l anim-stagger-list" data-anim-target>
-    <div class="card"><p class="eyebrow">编码效率</p><div style="font-size:84px;font-weight:800;color:var(--accent)">↑<span class="counter" data-to="5">0</span>x</div><p class="dim" style="color:var(--good);font-size:22px">智能体端到端编码</p></div>
-    <div class="card"><p class="eyebrow">交付周期</p><div style="font-size:84px;font-weight:800;color:var(--accent-2)">↓<span class="counter" data-to="60">0</span>%</div><p class="dim" style="color:var(--good);font-size:22px">端到端自动化</p></div>
-    <div class="card"><p class="eyebrow">缺陷率</p><div style="font-size:84px;font-weight:800;color:var(--accent-2)">↓<span class="counter" data-to="40">0</span>%</div><p class="dim" style="color:var(--good);font-size:22px">评审 + 自修复</p></div>
-    <div class="card"><p class="eyebrow">知识复用</p><div style="font-size:84px;font-weight:800;color:var(--accent)">↑<span class="counter" data-to="10">0</span>x</div><p class="dim" style="color:var(--good);font-size:22px">资产化沉淀</p></div>
+<!-- ============ 18 VIBE CODING SOP ============ -->
+<section class="slide grid-bg" data-title="Vibe Coding SOP">
+  <p class="kicker">SOP · 从0开始 Vibe Coding</p>
+  <h2 class="h2">从0开始的 Vibe Coding SOP</h2>
+  <p class="lede mb-s">用自然语言驱动智能体编码的标准化流程，每一步都有注意事项。</p>
+  <div class="sop-grid anim-stagger-list" data-anim-target>
+    <div class="sop-step">
+      <div class="sop-num">01</div>
+      <div class="sop-body">
+        <h4>需求拆解</h4>
+        <p>用自然语言描述产品目标，让智能体拆解为可执行的功能模块。</p>
+        <div class="sop-warn">⚠ 需求必须具体可验证，避免「做一个好用的系统」等模糊描述。</div>
+      </div>
+    </div>
+    <div class="sop-step">
+      <div class="sop-num">02</div>
+      <div class="sop-body">
+        <h4>架构约定</h4>
+        <p>明确技术栈、目录结构与代码规范，写入项目文档供智能体遵循。</p>
+        <div class="sop-warn">⚠ 不先约定架构，智能体会自行发挥导致技术栈混乱。</div>
+      </div>
+    </div>
+    <div class="sop-step">
+      <div class="sop-num">03</div>
+      <div class="sop-body">
+        <h4>增量编码</h4>
+        <p>按模块逐步生成，每次只聚焦一个功能点，小步快跑。</p>
+        <div class="sop-warn">⚠ 一次性生成全部代码，出错后难以定位和回滚。</div>
+      </div>
+    </div>
+    <div class="sop-step">
+      <div class="sop-num">04</div>
+      <div class="sop-body">
+        <h4>即时验证</h4>
+        <p>每生成一个模块立即运行测试，确保可用再继续下一步。</p>
+        <div class="sop-warn">⚠ 跳过验证堆积到最后，bug 成本指数级上升。</div>
+      </div>
+    </div>
+    <div class="sop-step">
+      <div class="sop-num">05</div>
+      <div class="sop-body">
+        <h4>版本提交</h4>
+        <p>每个可用模块即时 commit，写清变更说明，保留回滚能力。</p>
+        <div class="sop-warn">⚠ 不提交版本，智能体改坏了无法回退到可用状态。</div>
+      </div>
+    </div>
+    <div class="sop-step">
+      <div class="sop-num">06</div>
+      <div class="sop-body">
+        <h4>人工把关</h4>
+        <p>关键逻辑和安全相关代码必须人工 Review，不可全权交给智能体。</p>
+        <div class="sop-warn">⚠ 盲目信任智能体输出，安全漏洞与逻辑错误会被掩盖。</div>
+      </div>
+    </div>
   </div>
-  <p class="dim2 mt-l" style="font-size:20px">* 典型场景下的相对提升参考值，实际收益随成熟度递增。</p>
-  <div class="deck-footer"><span class="dim2">04 · 价值与落地</span><span class="snum" data-current="18" data-total="22"></span></div>
-  <div class="notes">四个核心指标：编码效率提升数倍、交付周期与缺陷率显著下降、知识复用率量级跃升。值得注意的是，这些收益会随自进化智能体的成熟持续放大。</div>
+  <div class="deck-footer"><span class="dim2">价值与落地</span><span class="snum" data-current="18" data-total="22"></span></div>
+  <style>
+    .sop-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+    .sop-step{display:flex;gap:16px;padding:20px 22px;background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .sop-num{font-family:var(--font-mono);font-size:28px;font-weight:800;color:var(--accent);line-height:1;flex-shrink:0}
+    .sop-body h4{margin:0 0 4px;font-size:20px}
+    .sop-body p{margin:0 0 6px;font-size:15px;color:var(--text-2);line-height:1.5}
+    .sop-warn{font-size:13px;color:var(--bad);line-height:1.5;background:color-mix(in srgb,var(--bad) 8%,transparent);padding:6px 10px;border-radius:6px}
+  </style>
 </section>
 
 <!-- ============ 19 ROADMAP ============ -->

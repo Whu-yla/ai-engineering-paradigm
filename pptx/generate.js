@@ -319,44 +319,7 @@ function addFooter(slide, text, align = "right") {
   slide.render();
 }
 
-// ============================================================
-// SLIDE 5: 传统瓶颈
-// ============================================================
-{
-  let slide = pres.addSlide();
-  slide.background = { color: C.bg };
-  addEyebrow(slide, "Pain Points · 瓶颈", 0.35, C.primary);
-  addSlideTitle(slide, "传统生产范式的四大瓶颈", 0.7);
-
-  const items = [
-    { num: "①", title: "知识不可沉淀", desc: "经验停留在个人，项目结束即流失，无法沉淀为组织级工程资产。" },
-    { num: "②", title: "协作成本高昂", desc: "上下文反复同步、评审依赖人肉对齐，跨团队协作损耗巨大。" },
-    { num: "③", title: "质量依赖个体", desc: "强依赖资深工程师，质量与速度难以兼得，规模扩张即触天花板。" },
-    { num: "④", title: "迭代反馈迟滞", desc: "从需求到上线链路冗长，反馈回路以「天 / 周」计，难以快速试错。" },
-  ];
-  const { cards } = cardGrid(2, 2, { startY: 1.5, areaH: CONTENT_H - 0.7, gapX: 0.3, gapY: 0.25 });
-  cards.forEach((pos, i) => {
-    const item = items[i];
-    let card = slide.addShape(pres.shapes.RECTANGLE, {
-      x: pos.x, y: pos.y, w: pos.w, h: pos.h,
-      fill: { color: C.card }, shadow: makeShadow()
-    });
-    card.addShape(pres.shapes.RECTANGLE, {
-      x: 0, y: 0, w: pos.w, h: 0.06,
-      fill: { color: C.accent }
-    });
-    card.addText(item.num + " " + item.title, {
-      x: pos.padding, y: pos.padding + 0.1, w: pos.w - pos.padding * 2, h: 0.45,
-      fontSize: 20, fontFace: "Georgia", color: C.text, bold: true
-    });
-    card.addText(item.desc, {
-      x: pos.padding, y: pos.padding + 0.6, w: pos.w - pos.padding * 2, h: pos.h - 0.9,
-      fontSize: 15, fontFace: "Calibri", color: C.text2
-    });
-  });
-  addFooter(slide, "01 · 时代背景");
-  slide.render();
-}
+// (Slide 5 removed — traditional bottlenecks slide not in latest HTML)
 
 // ============================================================
 // SLIDE 6: SECTION 02
@@ -697,12 +660,12 @@ addPillarSlide(
 }
 
 // ============================================================
-// SLIDE 16: SECTION 04
+// SLIDE 16: 写在最后 (Section divider)
 // ============================================================
 {
   let slide = pres.addSlide();
   slide.background = { color: C.primary };
-  slide.addText("Section · 04", {
+  slide.addText("写在最后", {
     x: CENTER_X - 2, y: 1.5, w: 4, h: 0.4,
     fontSize: 15, fontFace: "Calibri", color: C.accent, bold: true,
     align: "center", charSpacing: 0.5, uppercase: true
@@ -724,112 +687,167 @@ addPillarSlide(
 }
 
 // ============================================================
-// SLIDE 17: 范式对比
+// SLIDE 17: BS系统技术栈与服务架构
 // ============================================================
 {
   let slide = pres.addSlide();
   slide.background = { color: C.bg };
-  addEyebrow(slide, "Before vs After · 范式对比", 0.35, C.primary);
-  addSlideTitle(slide, "传统范式 vs 新型范式", 0.7);
+  addEyebrow(slide, "Architecture · 技术路线", 0.3, C.primary);
+  addSlideTitle(slide, "BS系统技术栈与服务架构", 0.6);
 
-  const leftX = CONTENT_X;
-  const rightX = CONTENT_X + CONTENT_W / 2 + 0.15;
-  const colW = CONTENT_W / 2 - 0.15;
-  const cardH = 3.3;
-  const cardY = 1.45;
+  // 6 layers of tech stack
+  const layers = [
+    { name: "用户层", hl: false, cells: ["🌐 Web浏览器", "📱 移动端H5", "🖥️ 桌面客户端", "🔧 管理后台"] },
+    { name: "代理层", hl: true, cells: ["⚖️ Nginx负载均衡", "🔒 HTTPS/SSL", "🚪 API网关", "🛡️ WAF防火墙"] },
+    { name: "应用服务", hl: false, cells: ["📦 用户服务", "📦 业务服务", "📦 权限服务", "📦 文件服务", "📦 消息服务"] },
+    { name: "数据中台", hl: true, cells: ["📊 数据采集", "📊 数据治理", "📊 数据分析", "📊 数据可视化"] },
+    { name: "中间件", hl: false, cells: ["⚡ Redis缓存", "💌 RabbitMQ", "🔍 ElasticSearch", "📋 Nacos"] },
+    { name: "数据库", hl: true, cells: ["🗄️ MySQL集群", "🗄️ MongoDB", "🗄️ ClickHouse", "🗄️ MinIO"] },
+  ];
+  const labelW = 0.85;
+  const labelGap = 0.15;
+  const cellGap = 0.08;
+  const layerGap = 0.08;
+  const layerH = 0.42;
+  const cellAreaX = CONTENT_X + labelW + labelGap;
+  const cellAreaW = CONTENT_W - labelW - labelGap;
+  const startY = 1.35;
 
-  let leftCard = slide.addShape(pres.shapes.RECTANGLE, {
-    x: leftX, y: cardY, w: colW, h: cardH,
-    fill: { color: C.card }, shadow: makeShadow()
-  });
-  leftCard.addShape(pres.shapes.RECTANGLE, {
-    x: 0, y: 0, w: colW, h: 0.06,
-    fill: { color: C.bad }
-  });
-  leftCard.addText("传统范式", {
-    x: 0.3, y: 0.2, w: colW - 0.6, h: 0.45,
-    fontSize: 22, fontFace: "Georgia", color: C.text, bold: true
-  });
-  const badItems = ["人力密集，人主导执行", "经验难沉淀，随人流失", "协作靠口头同步与对齐", "质量依赖资深个体把关", "反馈回路以「天 / 周」计"];
-  badItems.forEach((txt, i) => {
-    leftCard.addText(txt, {
-      x: 0.3, y: 0.8 + i * 0.48, w: colW - 0.6, h: 0.4,
-      fontSize: 15, fontFace: "Calibri", color: C.text2, bullet: true
+  layers.forEach((layer, li) => {
+    const y = startY + li * (layerH + layerGap);
+    // Label
+    const labelColor = layer.hl ? C.accent : C.primary;
+    slide.addShape(pres.shapes.ROUNDED_RECTANGLE, {
+      x: CONTENT_X, y, w: labelW, h: layerH,
+      fill: { color: labelColor }, rectRadius: 0.06
+    });
+    slide.addText(layer.name, {
+      x: CONTENT_X, y, w: labelW, h: layerH,
+      align: "center", valign: "middle",
+      fontSize: 11, fontFace: "Calibri", color: "FFFFFF", bold: true
+    });
+    // Cells
+    const numCells = layer.cells.length;
+    const cellW = (cellAreaW - cellGap * (numCells - 1)) / numCells;
+    layer.cells.forEach((cell, ci) => {
+      const cx = cellAreaX + ci * (cellW + cellGap);
+      const fillColor = layer.hl ? "FFF5EB" : C.card;
+      const borderColor = layer.hl ? C.accent : "E2E8F0";
+      slide.addShape(pres.shapes.ROUNDED_RECTANGLE, {
+        x: cx, y, w: cellW, h: layerH,
+        fill: { color: fillColor }, rectRadius: 0.05,
+        line: { color: borderColor, width: layer.hl ? 1.5 : 1 },
+        shadow: makeShadow()
+      });
+      slide.addText(cell, {
+        x: cx, y, w: cellW, h: layerH,
+        align: "center", valign: "middle",
+        fontSize: 10, fontFace: "Calibri", color: C.text
+      });
     });
   });
 
-  let rightCard = slide.addShape(pres.shapes.RECTANGLE, {
-    x: rightX, y: cardY, w: colW, h: cardH,
-    fill: { color: C.card }, shadow: makeShadow()
-  });
-  rightCard.addShape(pres.shapes.RECTANGLE, {
-    x: 0, y: 0, w: colW, h: 0.06,
-    fill: { color: C.good }
-  });
-  rightCard.addText("新型范式", {
-    x: 0.3, y: 0.2, w: colW - 0.6, h: 0.45,
-    fontSize: 22, fontFace: "Georgia", color: C.text, bold: true
-  });
-  const goodItems = ["智能体密集，人负责编排决策", "知识资产化，可复用可累积", "协作靠版本基线与知识库", "质量靠智能体评审 + 自修复", "反馈回路以「分钟」计"];
-  goodItems.forEach((txt, i) => {
-    rightCard.addText(txt, {
-      x: 0.3, y: 0.8 + i * 0.48, w: colW - 0.6, h: 0.4,
-      fontSize: 15, fontFace: "Calibri", color: C.text2, bullet: true
+  // Roles flow at bottom
+  const roles = ["产品经理", "需求分析", "UI/UX设计", "开发", "测试", "运维"];
+  const roleY = startY + 6 * (layerH + layerGap) + 0.1;
+  const roleW = 1.1;
+  const roleGap = 0.25;
+  const arrowW = 0.3;
+  const rolesTotalW = roles.length * roleW + (roles.length - 1) * roleGap;
+  const rolesStartX = (SLIDE_W - rolesTotalW) / 2;
+  roles.forEach((role, i) => {
+    const rx = rolesStartX + i * (roleW + roleGap);
+    slide.addShape(pres.shapes.ROUNDED_RECTANGLE, {
+      x: rx, y: roleY, w: roleW, h: 0.35,
+      fill: { color: C.card },
+      line: { color: C.accent, width: 1.5 },
+      rectRadius: 0.17
     });
+    slide.addText(role, {
+      x: rx, y: roleY, w: roleW, h: 0.35,
+      align: "center", valign: "middle",
+      fontSize: 10, fontFace: "Calibri", color: C.accent, bold: true
+    });
+    if (i < roles.length - 1) {
+      slide.addText("→", {
+        x: rx + roleW, y: roleY, w: roleGap, h: 0.35,
+        align: "center", valign: "middle",
+        fontSize: 12, fontFace: "Calibri", color: C.text3
+      });
+    }
   });
 
-  slide.addText("→", {
-    x: CENTER_X - 0.35, y: cardY + cardH / 2 - 0.3, w: 0.7, h: 0.6,
-    fontSize: 34, fontFace: "Calibri", color: C.text3, align: "center", bold: true
-  });
-
-  addFooter(slide, "04 · 价值与落地");
+  addFooter(slide, "价值与落地");
   slide.render();
 }
 
 // ============================================================
-// SLIDE 18: 效率跃迁
+// SLIDE 18: 从0开始的 Vibe Coding SOP
 // ============================================================
 {
   let slide = pres.addSlide();
   slide.background = { color: C.bg };
-  addEyebrow(slide, "Metrics · 效率跃迁", 0.35, C.primary);
-  addSlideTitle(slide, "范式带来的效率跃迁", 0.7);
+  addEyebrow(slide, "SOP · 从0开始 Vibe Coding", 0.3, C.primary);
+  addSlideTitle(slide, "从0开始的 Vibe Coding SOP", 0.6);
 
-  const kpis = [
-    { label: "编码效率", value: "↑5x", color: C.primary, sub: "智能体端到端编码" },
-    { label: "交付周期", value: "↓60%", color: C.accent, sub: "端到端自动化" },
-    { label: "缺陷率", value: "↓40%", color: C.accent, sub: "评审 + 自修复" },
-    { label: "知识复用", value: "↑10x", color: C.primary, sub: "资产化沉淀" },
+  const steps = [
+    { num: "01", title: "需求拆解", desc: "用自然语言描述产品目标，让智能体拆解为可执行的功能模块。", warn: "⚠ 需求必须具体可验证，避免模糊描述。" },
+    { num: "02", title: "架构约定", desc: "明确技术栈、目录结构与代码规范，写入项目文档供智能体遵循。", warn: "⚠ 不先约定架构，智能体会自行发挥导致技术栈混乱。" },
+    { num: "03", title: "增量编码", desc: "按模块逐步生成，每次只聚焦一个功能点，小步快跑。", warn: "⚠ 一次性生成全部代码，出错后难以定位和回滚。" },
+    { num: "04", title: "即时验证", desc: "每生成一个模块立即运行测试，确保可用再继续下一步。", warn: "⚠ 跳过验证堆积到最后，bug成本指数级上升。" },
+    { num: "05", title: "版本提交", desc: "每个可用模块即时commit，写清变更说明，保留回滚能力。", warn: "⚠ 不提交版本，智能体改坏了无法回退到可用状态。" },
+    { num: "06", title: "人工把关", desc: "关键逻辑和安全相关代码必须人工Review，不可全权交给智能体。", warn: "⚠ 盲目信任智能体输出，安全漏洞与逻辑错误会被掩盖。" },
   ];
-  const cardW = (CONTENT_W - 0.3 * 3) / 4;
-  const cardH = 2.8;
-  const startY = 1.55;
-  kpis.forEach((k, i) => {
-    const x = CONTENT_X + i * (cardW + 0.3);
-    let card = slide.addShape(pres.shapes.ROUNDED_RECTANGLE, {
-      x, y: startY, w: cardW, h: cardH,
-      fill: { color: C.card }, rectRadius: 0.1, shadow: makeShadow()
+
+  const cols = 2;
+  const cardGapX = 0.2;
+  const cardGapY = 0.12;
+  const cardW = (CONTENT_W - cardGapX) / cols;
+  const cardH = 1.15;
+  const startY = 1.3;
+
+  steps.forEach((s, i) => {
+    const col = i % cols;
+    const row = Math.floor(i / cols);
+    const x = CONTENT_X + col * (cardW + cardGapX);
+    const y = startY + row * (cardH + cardGapY);
+
+    let card = slide.addShape(pres.shapes.RECTANGLE, {
+      x, y, w: cardW, h: cardH,
+      fill: { color: C.card }, shadow: makeShadow()
     });
-    card.addText(k.label, {
-      x: 0.2, y: 0.3, w: cardW - 0.4, h: 0.35,
-      fontSize: 14, fontFace: "Calibri", color: C.text3,
-      charSpacing: 0.5, uppercase: true
+    // Left accent bar
+    card.addShape(pres.shapes.RECTANGLE, {
+      x: 0, y: 0, w: 0.06, h: cardH,
+      fill: { color: C.accent }
     });
-    card.addText(k.value, {
-      x: 0.2, y: 0.75, w: cardW - 0.4, h: 0.8,
-      fontSize: 40, fontFace: "Calibri", color: k.color, bold: true
+    // Number
+    card.addText(s.num, {
+      x: 0.2, y: 0.12, w: 0.55, h: 0.4,
+      fontSize: 20, fontFace: "Calibri", color: C.accent, bold: true
     });
-    card.addText(k.sub, {
-      x: 0.2, y: 1.7, w: cardW - 0.4, h: 0.4,
-      fontSize: 14, fontFace: "Calibri", color: C.good
+    // Title
+    card.addText(s.title, {
+      x: 0.8, y: 0.1, w: cardW - 1.0, h: 0.3,
+      fontSize: 15, fontFace: "Georgia", color: C.text, bold: true
+    });
+    // Description
+    card.addText(s.desc, {
+      x: 0.8, y: 0.42, w: cardW - 1.0, h: 0.3,
+      fontSize: 10, fontFace: "Calibri", color: C.text2
+    });
+    // Warning
+    card.addShape(pres.shapes.RECTANGLE, {
+      x: 0.8, y: 0.78, w: cardW - 1.0, h: 0.32,
+      fill: { color: "FEF2F2" }
+    });
+    card.addText(s.warn, {
+      x: 0.85, y: 0.78, w: cardW - 1.1, h: 0.32,
+      fontSize: 8, fontFace: "Calibri", color: C.bad, valign: "middle"
     });
   });
-  slide.addText("* 典型场景下的相对提升参考值，实际收益随成熟度递增。", {
-    x: CONTENT_X, y: SLIDE_H - 0.8, w: CONTENT_W, h: 0.25,
-    fontSize: 12, fontFace: "Calibri", color: C.text3
-  });
-  addFooter(slide, "04 · 价值与落地");
+
+  addFooter(slide, "价值与落地");
   slide.render();
 }
 
@@ -882,17 +900,57 @@ addPillarSlide(
       });
     });
   });
-  addFooter(slide, "04 · 价值与落地");
+  addFooter(slide, "价值与落地");
   slide.render();
 }
 
 // ============================================================
-// SLIDE 20: 总结 + 结语
+// SLIDE 20: 挑战与应对
 // ============================================================
 {
   let slide = pres.addSlide();
-  slide.background = { color: C.primary };
-  addEyebrow(slide, "Takeaways · 总结", 0.35, C.accent);
+  slide.background = { color: C.bg };
+  addEyebrow(slide, "Challenges · 挑战与应对", 0.35, C.primary);
+  addSlideTitle(slide, "三类核心挑战及应对", 0.7);
+
+  const challenges = [
+    { num: "①", title: "智能体可靠性 · 幻觉与错误决策", desc: "应对：人机协同把关 + 版本控制回滚兜底，关键决策保留人工确认节点。", color: C.warn, bg: "FFFBEB" },
+    { num: "②", title: "数据安全与合规 · 代码与知识上云", desc: "应对：本地IDE保留敏感数据 + 分级授权 + 私有化模型部署，建立数据出境边界。", color: C.bad, bg: "FEF2F2" },
+    { num: "③", title: "工程文化转型 · 从「写代码」到「编排智能体」", desc: "应对：建立智能体协作规范与度量体系，重塑工程师角色与能力模型。", color: C.good, bg: "F0FDF4" },
+  ];
+  const cardH = 1.1;
+  const gap = 0.15;
+  const startY = 1.4;
+  challenges.forEach((ch, i) => {
+    const y = startY + i * (cardH + gap);
+    let card = slide.addShape(pres.shapes.RECTANGLE, {
+      x: CONTENT_X, y, w: CONTENT_W, h: cardH,
+      fill: { color: ch.bg }, shadow: makeShadow()
+    });
+    card.addShape(pres.shapes.RECTANGLE, {
+      x: 0, y: 0, w: 0.06, h: cardH,
+      fill: { color: ch.color }
+    });
+    card.addText(ch.num + " " + ch.title, {
+      x: 0.3, y: 0.15, w: CONTENT_W - 0.6, h: 0.4,
+      fontSize: 18, fontFace: "Georgia", color: C.text, bold: true
+    });
+    card.addText(ch.desc, {
+      x: 0.3, y: 0.6, w: CONTENT_W - 0.6, h: 0.4,
+      fontSize: 14, fontFace: "Calibri", color: C.text2
+    });
+  });
+  addFooter(slide, "价值与落地");
+  slide.render();
+}
+
+// ============================================================
+// SLIDE 21: 总结
+// ============================================================
+{
+  let slide = pres.addSlide();
+  slide.background = { color: C.bg };
+  addEyebrow(slide, "Takeaways · 总结", 0.35, C.primary);
   addSlideTitle(slide, "三句话总结", 0.7);
 
   const takeaways = [
@@ -907,7 +965,7 @@ addPillarSlide(
     const y = startY + i * (cardH + gap);
     let card = slide.addShape(pres.shapes.RECTANGLE, {
       x: CONTENT_X, y, w: CONTENT_W, h: cardH,
-      fill: { color: "1A2050" }, shadow: makeShadow()
+      fill: { color: C.card }, shadow: makeShadow()
     });
     card.addShape(pres.shapes.RECTANGLE, {
       x: 0, y: 0, w: 0.05, h: cardH,
@@ -919,21 +977,35 @@ addPillarSlide(
     });
     card.addText(tk.title, {
       x: 1.0, y: 0.15, w: 2, h: 0.35,
-      fontSize: 18, fontFace: "Georgia", color: "FFFFFF", bold: true
+      fontSize: 18, fontFace: "Georgia", color: C.text, bold: true
     });
     card.addText(tk.desc, {
       x: 1.0, y: 0.5, w: CONTENT_W - 1.4, h: 0.45,
-      fontSize: 14, fontFace: "Calibri", color: "CBD5E1"
+      fontSize: 14, fontFace: "Calibri", color: C.text2
     });
   });
+  addFooter(slide, "价值与落地");
+  slide.render();
+}
 
-  slide.addText("让智能体成为生产力，让工程师回归创造。", {
-    x: CONTENT_X, y: SLIDE_H - 0.9, w: CONTENT_W, h: 0.35,
-    fontSize: 16, fontFace: "Georgia", color: C.secondary, align: "center", italic: true
-  });
+// ============================================================
+// SLIDE 22: Thanks
+// ============================================================
+{
+  let slide = pres.addSlide();
+  slide.background = { color: C.dark };
   slide.addText("Thanks", {
-    x: CONTENT_X, y: SLIDE_H - 0.55, w: CONTENT_W, h: 0.3,
-    fontSize: 14, fontFace: "Calibri", color: "64748B", align: "center"
+    x: CENTER_X - 4, y: 1.5, w: 8, h: 1.5,
+    fontSize: 60, fontFace: "Georgia", color: "FFFFFF", bold: true,
+    align: "center", charSpacing: 3
+  });
+  slide.addText("让智能体成为生产力，让工程师回归创造。", {
+    x: CENTER_X - 4, y: 3.2, w: 8, h: 0.5,
+    fontSize: 18, fontFace: "Georgia", color: C.secondary, align: "center", italic: true
+  });
+  slide.addText("新型信息化工程生产范式  ·  2026", {
+    x: CENTER_X - 4, y: 4.0, w: 8, h: 0.3,
+    fontSize: 12, fontFace: "Calibri", color: "64748B", align: "center"
   });
   slide.render();
 }
